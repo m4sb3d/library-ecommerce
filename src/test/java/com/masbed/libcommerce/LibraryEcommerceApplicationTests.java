@@ -1,13 +1,11 @@
-package com.example.demo;
+package com.masbed.libcommerce;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class LibraryEcommerceApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+
 
 }
