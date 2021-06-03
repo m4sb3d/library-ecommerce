@@ -20,22 +20,16 @@ public class NewAuthorRequest {
     private String description;
 
 
-    public NewAuthorRequest(@NotBlank String name, @NotBlank String email, @NotBlank @Size(max = 400) String description) {
+    public NewAuthorRequest(@NotBlank String name,
+                            @NotBlank String email,
+                            @NotBlank @Size(max = 400) String description) {
         this.name = name;
         this.email = email;
         this.description = description;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public Author toModel(){

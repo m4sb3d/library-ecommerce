@@ -3,6 +3,8 @@ package com.masbed.libcommerce.rest;
 import com.masbed.libcommerce.domain.Author;
 import com.masbed.libcommerce.rest.contract.NewAuthorRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +26,6 @@ public class AuthorController {
         Author author = newAuthorRequest.toModel();
         entityManager.persist(author);
 
-        return ResponseEntity.ok(newAuthorRequest);
+        return ResponseEntity.ok().body(newAuthorRequest);
     }
 }
