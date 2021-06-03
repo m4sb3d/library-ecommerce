@@ -1,6 +1,7 @@
 package com.masbed.libcommerce.rest.contract;
 
 import com.masbed.libcommerce.domain.Author;
+import com.masbed.libcommerce.validator.Exist;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -13,6 +14,7 @@ public class NewAuthorRequest {
 
     @NotBlank
     @Email
+    @Exist(domainClass = Author.class, fildname = "email", expected = false)
     private String email;
 
     @NotBlank
