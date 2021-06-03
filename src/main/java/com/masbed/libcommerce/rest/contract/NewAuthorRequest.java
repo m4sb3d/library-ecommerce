@@ -34,6 +34,14 @@ public class NewAuthorRequest {
         return email;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public Author toModel(){
         return  new Author(this.name,this.email,this.description);
     }
