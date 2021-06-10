@@ -1,10 +1,9 @@
 package com.masbed.libcommerce.rest;
 
-import com.masbed.libcommerce.domain.Author;
-import com.masbed.libcommerce.rest.contract.NewAuthorRequest;
+
+import com.masbed.libcommerce.domain.Category;
+import com.masbed.libcommerce.rest.contract.NewCategoryRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,17 +14,17 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
-public class AuthorController {
+public class NewCategoryController {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    @PostMapping(value = "/api/author")
+    @PostMapping(value = "/api/category")
     @Transactional
-    public ResponseEntity<?> newAuthor(@RequestBody @Valid NewAuthorRequest newAuthorRequest){
-        Author author = newAuthorRequest.toModel();
-        entityManager.persist(author);
+    public ResponseEntity<?> newCategory(@RequestBody @Valid NewCategoryRequest newCategoryRequest){
+        Category category = newCategoryRequest.toModel();
+        entityManager.persist(category);
 
-        return ResponseEntity.ok().body(newAuthorRequest);
+        return ResponseEntity.ok().body(newCategoryRequest);
     }
 }

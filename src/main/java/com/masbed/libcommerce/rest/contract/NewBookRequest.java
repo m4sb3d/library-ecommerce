@@ -7,10 +7,7 @@ import com.masbed.libcommerce.domain.Category;
 import com.masbed.libcommerce.validator.Exist;
 import org.springframework.ui.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -104,7 +101,10 @@ public class NewBookRequest {
         return authorId;
     }
 
-    public Book toModel(){
-        return new Book(title,resume,markdown,price,pagesNumber,isbn,release,categoryId,authorId);
+    public Book toModel(EntityManager entityManager){
+        @NotNull Author author = entityManager.find(Author.class, authorId);
+        @NotNull Category category =  entityManager.find(Category.class, categoryId);
+
+        return new Book(title,resume,markdown,price,pagesNumber,isbn,release,category,author);
     }
 }

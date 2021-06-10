@@ -1,9 +1,7 @@
 package com.masbed.libcommerce.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -37,11 +35,15 @@ public class Book {
     @Future
     private Date release;
 
+    @ManyToOne
     @NotNull
-    private Long categoryId;
+    @Valid
+    private Category category;
 
+    @ManyToOne
     @NotNull
-    private Long authorId;
+    @Valid
+    private Author author;
 
     @Deprecated
     public Book(){}
@@ -49,7 +51,7 @@ public class Book {
     public Book(@NotBlank String title, @NotBlank @Size(max = 500) String resume, String markdown,
                 @NotBlank BigDecimal price, @NotNull @Min(10) Integer pagesNumber,
                 @NotNull String isbn, @Future Date release,
-                @NotNull Long categoryId, @NotNull Long authorId) {
+                @NotNull Category category, @NotNull Author author) {
         this.title = title;
         this.resume = resume;
         this.markdown = markdown;
@@ -57,9 +59,11 @@ public class Book {
         this.pagesNumber = pagesNumber;
         this.isbn = isbn;
         this.release = release;
-        this.categoryId = categoryId;
-        this.authorId = authorId;
+        this.category = category;
+        this.author = author;
     }
+
+
 
     public String getTitle() {
         return title;
@@ -89,11 +93,11 @@ public class Book {
         return release;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public Author getAuthor() {
+        return author;
     }
 }
