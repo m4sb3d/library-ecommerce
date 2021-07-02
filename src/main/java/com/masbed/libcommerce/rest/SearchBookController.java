@@ -20,9 +20,9 @@ public class SearchBookController {
         public ResponseEntity<?> searchList(@PathVariable("id") Long id) {
 
             Book book = entityManager.find(Book.class, id);
-            if(book == null){
 
-                return ResponseEntity.notFound().build();
+            if(book == null){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new StandardError(Arrays.asList("This book ID don't exists")));
             }
 
             return ResponseEntity.ok().body(book);
