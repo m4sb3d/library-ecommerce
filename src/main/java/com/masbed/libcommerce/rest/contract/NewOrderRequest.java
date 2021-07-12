@@ -46,4 +46,6 @@ public class NewOrderRequest {
         newItemRequestList.forEach(newItemRequest -> itemList.add(newItemRequest.toModel()));
         return new Order(itemList, total);
     }
+
+
 }

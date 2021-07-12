@@ -2,7 +2,12 @@ package com.masbed.libcommerce.rest;
 
 import com.masbed.libcommerce.domain.Purchase;
 import com.masbed.libcommerce.rest.contract.NewPurchaseRequest;
+import com.masbed.libcommerce.validator.StateBelongCountryValidator;
+import com.masbed.libcommerce.validator.TotalValueValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +24,20 @@ public class NewPurchaseController {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Autowired
+    private StateBelongCountryValidator stateBelongCountryValidator;
+
+    @Autowired
+    private TotalValueValidator totalValueValidator;
+
+    @InitBinder
+    public void init(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(
+                stateBelongCountryValidator,
+                    totalValueValidator
+        );
+    }
 
     @PostMapping(value = "api/buy" )
     @Transactional
